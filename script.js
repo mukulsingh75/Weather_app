@@ -14,9 +14,20 @@ async function checkWeather(city){
     const api_key = "695c8874ed0507e920b7ce8fb646b2d2";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`;
 
-    const weather_data =await fetch(url).then((resp)=>{
-       return resp.json();
-    });
+    // const weather_data =await fetch(url).then((resp)=>{
+    //    return resp.json();
+    // });
+ 
+    let weather_data;      //initialize wether_data before to make it global so that it can be used after try catch block
+
+    try{
+        const response =await axios.get(url);
+        weather_data=response.data;
+    }
+    catch(err){
+        console.log("error");
+        return;
+    }
 
     console.log(weather_data);
 
